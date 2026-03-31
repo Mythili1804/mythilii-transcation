@@ -25,27 +25,19 @@ function gtag(){dataLayer.push(arguments);}
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Work Sans',sans-serif;background:var(--bg);color:var(--text);}
-
-/* HEADER */
 header{position:fixed;width:100%;background:#0a0a0a;border-bottom:1px solid var(--border);}
 nav{display:flex;justify-content:space-between;padding:20px;}
 .logo{color:var(--accent);font-family:'Bebas Neue';font-size:2rem;cursor:pointer;}
 .nav-links{display:flex;gap:20px;}
 .nav-links a, .cart-btn{color:white;text-decoration:none;background:none;border:none;cursor:pointer}
 .cart-count{background:var(--accent);color:black;padding:2px 6px;border-radius:50%;margin-left:5px}
-
-/* PAGES */
 .page{display:none;padding:100px 20px;}
 .active{display:block}
-
-/* GRID */
-.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
 .product-card{border:1px solid var(--border);padding:15px;border-radius:10px}
 .product-image{text-align:center;font-size:40px;margin-bottom:10px}
 .product-price{color:var(--accent)}
 button{padding:8px;border:none;background:var(--accent);cursor:pointer}
-
-/* CART */
 .cart-item{border-bottom:1px solid var(--border);padding:10px 0}
 </style>
 </head>
@@ -68,7 +60,7 @@ Cart <span id="cartCount">0</span>
 <!-- HOME -->
 <div id="home" class="page active">
 <h1>CAFE VIBES ☕</h1>
-<p>Fresh coffee & tasty snacks</p>
+<p>Fresh coffee & delicious bites made for you</p>
 <button onclick="showPage('products')">Explore Menu</button>
 </div>
 
@@ -100,7 +92,7 @@ Cart <span id="cartCount">0</span>
 <!-- SUCCESS -->
 <div id="success" class="page">
 <h1>Order Confirmed ☕</h1>
-<p>Enjoy your coffee!</p>
+<p>Your café order has been placed successfully!</p>
 <button onclick="reset()">Back to Home</button>
 </div>
 
@@ -113,19 +105,18 @@ const products = [
 {id:5,name:"Sandwich",price:6,image:"🥪"},
 {id:6,name:"Burger",price:7,image:"🍔"},
 {id:7,name:"Fries",price:3,image:"🍟"},
-{id:8,name:"Cake",price:5,image:"🍰"}
+{id:8,name:"Cake",price:5,image:"🍰"},
+{id:9,name:"Ice Cream",price:4,image:"🍨"}
 ];
 
 let cart=[];
 
-/* SHOW PAGE */
 function showPage(p){
 document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
 document.getElementById(p).classList.add('active');
 if(p==='cart')renderCart();
 }
 
-/* RENDER PRODUCTS */
 function renderProducts(){
 document.getElementById('productList').innerHTML=
 products.map(p=>`
@@ -138,7 +129,6 @@ products.map(p=>`
 `).join('');
 }
 
-/* ADD TO CART */
 function addToCart(id){
 let p=products.find(x=>x.id===id);
 cart.push(p);
@@ -152,7 +142,6 @@ price:p.price
 updateCart();
 }
 
-/* CART */
 function renderCart(){
 let html="";
 let total=0;
@@ -166,12 +155,10 @@ document.getElementById('cartItems').innerHTML=html;
 document.getElementById('total').innerText=total;
 }
 
-/* UPDATE COUNT */
 function updateCart(){
 document.getElementById('cartCount').innerText=cart.length;
 }
 
-/* ORDER */
 function placeOrder(e){
 e.preventDefault();
 
@@ -186,12 +173,10 @@ updateCart();
 showPage('success');
 }
 
-/* RESET */
 function reset(){
 showPage('home');
 }
 
-/* INIT */
 renderProducts();
 </script>
 
